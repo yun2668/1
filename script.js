@@ -1,31 +1,53 @@
-// 手機版選單
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
+const menuBtn = document.getElementById("menuBtn");
+const mainNav = document.getElementById("mainNav");
 
-menuToggle.addEventListener("click", () => {
-  navLinks.classList.toggle("open");
-});
+if (menuBtn && mainNav) {
 
-document.querySelectorAll(".nav-links a").forEach((link) => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
+  menuBtn.addEventListener("click", () => {
+
+    const isOpen = mainNav.classList.toggle("active");
+
+    menuBtn.setAttribute(
+      "aria-expanded",
+      isOpen ? "true" : "false"
+    );
+
+    menuBtn.textContent = isOpen ? "✕" : "☰";
+
   });
-});
 
-// 回到最上方按鈕
-const topBtn = document.getElementById("topBtn");
+  mainNav.querySelectorAll("a").forEach(link => {
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 420) {
-    topBtn.classList.add("show");
-  } else {
-    topBtn.classList.remove("show");
-  }
-});
+    link.addEventListener("click", () => {
 
-topBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+      mainNav.classList.remove("active");
+
+      menuBtn.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+      menuBtn.textContent = "☰";
+
+    });
+
   });
-});
+
+  window.addEventListener("resize", () => {
+
+    if (window.innerWidth > 760) {
+
+      mainNav.classList.remove("active");
+
+      menuBtn.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+      menuBtn.textContent = "☰";
+
+    }
+
+  });
+
+}
