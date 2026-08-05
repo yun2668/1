@@ -1,9 +1,6 @@
 const menuBtn = document.getElementById("menuBtn");
 const mainNav = document.getElementById("mainNav");
 
-// ==============================
-// 手機版選單
-// ==============================
 if (menuBtn && mainNav) {
 
   menuBtn.addEventListener("click", () => {
@@ -20,7 +17,6 @@ if (menuBtn && mainNav) {
   });
 
 
-  // 點選選單項目後，自動收合
   mainNav.querySelectorAll("a").forEach(link => {
 
     link.addEventListener("click", () => {
@@ -39,7 +35,6 @@ if (menuBtn && mainNav) {
   });
 
 
-  // 從手機版切回電腦版時，自動關閉選單
   window.addEventListener("resize", () => {
 
     if (window.innerWidth > 760) {
@@ -63,11 +58,11 @@ if (menuBtn && mainNav) {
 // ==============================
 // 常見問題 FAQ
 // ==============================
+
 document.querySelectorAll(".faq-item").forEach(item => {
 
   const btn = item.querySelector(".faq-question");
 
-  // 找不到 FAQ 按鈕就跳過
   if (!btn) return;
 
 
@@ -76,7 +71,7 @@ document.querySelectorAll(".faq-item").forEach(item => {
     const wasOpen = item.classList.contains("active");
 
 
-    // 先把其他 FAQ 全部關閉
+    // 先關閉其他 FAQ
     document.querySelectorAll(".faq-item").forEach(other => {
 
       other.classList.remove("active");
@@ -84,7 +79,7 @@ document.querySelectorAll(".faq-item").forEach(item => {
     });
 
 
-    // 如果原本沒有打開，就開啟目前這一題
+    // 再開啟目前這一題
     if (!wasOpen) {
 
       item.classList.add("active");
